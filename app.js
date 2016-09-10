@@ -38,7 +38,7 @@ angular.module('LunchCheck', [])
         $scope.reset = function () {
             $scope.lunch = "";
             $scope.message = "";
-             $scope.messageStatus = "";
+            $scope.messageStatus = "";
         };
 
     }

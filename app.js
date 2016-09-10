@@ -1,13 +1,13 @@
 (function () {
 'use strict';
 
-angular.module('LunchCheck', []);
-.controller('LunchCheckController', LunchCheckController) {
+angular.module('LunchCheck', [])
+.controller('LunchCheckController', LunchCheckController);
 
-    LunchCheckController.$inject = [$scope, $filter];
-    function LunchCheckController($scope, $filter) {
+    LunchCheckController.$inject = ['$scope'];
+    function LunchCheckController($scope) {
         $scope.lunch = "";
-        $scope.message = "test";
+        $scope.message = "";
 
         $scope.getMessage = function () {
             $scope.lunch = $scope.lunch.trim();
@@ -15,23 +15,27 @@ angular.module('LunchCheck', []);
                 $scope.message = "Please enter data first";
             }
 
-            var lunchCount = 1;
-            for (var i = 0; i < $scope.lunch.length; i++) {
-                if ($scope.lunch[i] === ',') {
-                    lunchCount++;
+            if ($scope.lunch.length > 0) {
+                var lunchCount = 1;
+                for (var i = 0; i < $scope.lunch.length; i++) {
+                    if ($scope.lunch[i] === ',') {
+                        lunchCount++;
+                    }
+                }
+
+                if (lunchCount < 4) {
+                    $scope.message = "Enjoy!";
+                } else {
+                    $scope.message = "Too much!";
                 }
             }
+        };
 
+        $scope.reset = function () {
+            $scope.lunch = "";
+            $scope.message = "";
+        };
 
-            if (lunchCount < 4) {
-                $scope.message = "Enjoy!"
-            } else {
-                $scope.message = "Too much!";
-            }
     }
-};
-
-
-});
 
 })();

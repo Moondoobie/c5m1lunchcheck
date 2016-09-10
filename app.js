@@ -8,11 +8,13 @@ angular.module('LunchCheck', [])
     function LunchCheckController($scope) {
         $scope.lunch = "";
         $scope.message = "";
+        $scope.messageStatus = "";
 
         $scope.getMessage = function () {
             $scope.lunch = $scope.lunch.trim();
             if ($scope.lunch === "") {
                 $scope.message = "Please enter data first";
+                $scope.messageStatus = "warn";
             }
 
             if ($scope.lunch.length > 0) {
@@ -25,8 +27,10 @@ angular.module('LunchCheck', [])
 
                 if (lunchCount < 4) {
                     $scope.message = "Enjoy!";
+                    $scope.messageStatus = "complete";
                 } else {
                     $scope.message = "Too much!";
+                    $scope.messageStatus = "complete";
                 }
             }
         };
@@ -34,6 +38,7 @@ angular.module('LunchCheck', [])
         $scope.reset = function () {
             $scope.lunch = "";
             $scope.message = "";
+             $scope.messageStatus = "";
         };
 
     }
